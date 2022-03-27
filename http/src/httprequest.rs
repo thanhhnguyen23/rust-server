@@ -1,3 +1,5 @@
+use std::collections::HashMap;
+
 #[derive(Debug, PartialEq)]
 pub enum Method{
   Get,
@@ -52,4 +54,20 @@ impl From<&str> for Version{
 fn test_version_into(){
   let m: Version = "HTTP/1.1".into();
   assert_eq!(m, Version::V1_1);
+}
+
+
+
+#[derive(Debug, PartialEq)]
+pub enum Resource{
+  Path(String)
+}
+
+#[derive(Debug)]
+pub struct HttpRequest{
+  pub method: Method,
+  pub version: Version,
+  pub resource: Resource,
+  pub headers: HashMap<String, String>,
+  pub msg_body: String,
 }
